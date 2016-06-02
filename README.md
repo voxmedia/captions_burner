@@ -4,18 +4,21 @@ A small os x app to burn srt file captions onto a video.
 
 ![Captions burner](./img/captions_burner.png)
 
-## Release
-
-Check out release if you want to download a working version
 
 ## Development
+
+The app uses, NWJS, ffmpeg fluent-ffmpeg and is packaged with a binary of ffmpeg for os x.
+
+```
+npm install
+```
+
+you might need to install `npm install nw -g`
 
 ```
 npm start
 ```
-The app uses, NWJS, ffmpeg fluent-ffmpeg,  
 
-you might need to install `npm install nw -g`
 
 
 ## Deployment
