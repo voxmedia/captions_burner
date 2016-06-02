@@ -1,0 +1,6 @@
+{
+  "name": "Captions burner",
+  "tagline": "NWJS os x desktop app that given a srt and a video burns the captions onto the video. Can also export as gif.",
+  "body": "# Captions burner \r\n\r\nMc os x desktop app that given a srt and a video burns the captions onto the video. Can also export as gif.\r\n\r\n![captions burner](https://github.com/voxmedia/captions_burner/raw/master/img/captions_burner.png)",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
