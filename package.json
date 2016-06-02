@@ -1,0 +1,24 @@
+{
+  "name": "captions_burner",
+  "version": "1.0.0",
+  "description": "takes in video and srt and burns captions onto the video",
+  "main": "index.html",
+  "window": {
+    "show": true,
+    "width": 350,
+    "height": 350,
+    "toolbar": true,
+    "icon": "app.icns"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nw"
+  },
+  "author": "Pietro Passarelli <pietro.passarelli@gmail.com> (http://pietropassarelli.com)",
+  "license": "ISC",
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.0",
+    "nw-builder": "^2.2.0",
+    "nwjs-osx-menu": "0.0.4"
+  }
+}

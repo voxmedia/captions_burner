@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Captions Burner</title>
+  <link rel="stylesheet" href="public/css/bootstrap.css"></link>
+</head>
+<body>
+  <div class="container">
+    <h1>Captions Burner</h1>
+    <p>Select a video file and an srt file to burn onto it</p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Video file</label>
+          <input id="fileDialogVideo" class="form-control" type="file" />
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Srt file</label>
+          <input id="fileDialogSrt" class="form-control" type="file" />
+        </div>
+
+        <hr>
+        <button type="submit"  id="btnBurnVideo" data-loading-text="Burning..."  class="btn btn-primary" autocomplete="off">Burn Video</button>
+
+
+        <button type="submit" id="btnBurnGif" class="btn btn-primary">Burn Gif</button>
+
+
+      </div><!-- end col  -->
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <p></p>
+      </div><!-- end col  -->
+
+    </div> <!-- end row -->
+
+
+  </div>
+
+
+<script type="text/javascript">
+
+//adds basic OSX functionality and shortcut to the app.
+//https://www.npmjs.com/package/nwjs-osx-menu
+require('nwjs-osx-menu')(window);
+var path = require('path');
+var srtToVideo =require('./lib/burn_srt_on_video.js');
+var videoToGif =require('./lib/video_to_gif.js');
+
+var videoSelected = false;
+var videoFilePath = "";
+var burningVideo = false;
+var srtSelected = false;
+var srtFilePath ="";
+var burningGif = false;
+
+/**
+* SELECT srt and Video
+*/
+//set video file path on video selection
+document.getElementById('fileDialogVideo').addEventListener("change", function(evt) {
+  // TODO: add some validation to check video file is proper format
+  videoFilePath = this.value;
+  videoSelected = true;
+  // console.log(videoFilePath);
+})
+
+document.getElementById('fileDialogSrt').addEventListener("change", function(evt) {
+  // TODO: add some validation to check video srt is proper format
+  srtFilePath = this.value;
+  srtSelected = true;
+  // console.log(srtFilePath);
+})
+
+/**
+* Burn Video
+*/
+//burn video when clickin btn
+document.getElementById("btnBurnVideo").addEventListener("click", function(){
+  if(videoSelected && srtSelected){
+    if(!burningGif){
+      //Burn Video and srt togethere
+      burningVideo = true;
+      //Loading icon
+      $('#btnBurnVideo').button('loading');
+
+      var videoFileName = path.basename(videoFilePath);
+      var videoFileDir = path.dirname(videoFilePath)
+      var output = videoFileDir+"/captioned_"+videoFileName;
+
+      srtToVideo.burn_text(videoFilePath,srtFilePath,output, function(resp){
+          console.log("done with video")
+          alert("Video has been saved: "+resp)
+          //reset loading icon
+          $('#btnBurnVideo').button('reset')
+            burningVideo = false;
+        }
+      )
+    }else{
+      alert("Making a gif, wait for it to end to burn a video");
+    }
+  }else{
+    alert("Make sure you have selected both video and srt file")
+  }
+});
+
+
+/**
+* Burn gif
+*/
+
+
+
+document.getElementById("btnBurnGif").addEventListener("click", function(){
+  //Burn Video and srt togethere as gif
+  //validation with video only in order to allow to convert video to gif if needed
+  //easter egg?
+  if(videoSelected){
+    if(!burningVideo){
+      burningGif = true;
+      //Loading icon
+      $('#btnBurnGif').button('loading');
+      //eg my_video.mp4
+      var videoFileName = path.basename(videoFilePath);
+      //eg /User/Dresktop
+      var videoFileDir = path.dirname(videoFilePath)
+      // eg .mp4
+      var extensionName= path.extname(videoFilePath)
+      //eg my_video
+      var nameWithoutExtension = path.basename(videoFilePath,extensionName )
+      //output in same location as original video but with .gif extension
+      var output = videoFileDir+"/"+nameWithoutExtension+".gif";
+
+      videoToGif.makeGif(videoFilePath,srtFilePath,output, function(resp){
+          console.log("done with video"+resp)
+          $('#btnBurnGif').button('reset')
+          burningGif = false;
+        });
+    }else{
+      alert("burning a video, wait until is done to make a gif")
+    }
+  }else{
+      alert("Make sure you have selected at least a video file")
+  }
+
+});
+
+
+</script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="public/js/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="public/js/bootstrap.min.js"></script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+   <!-- Latest compiled and minified JavaScript -->
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+
+
+</body>
+</html>
