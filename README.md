@@ -4,6 +4,10 @@ A small os x app to burn srt file captions onto a video.
 
 ![Captions burner](./img/captions_burner.png)
 
+Here's an example screenshot of what that would like on the video
+
+![Example](./img/example_captions.png)
+
 
 ## Development
 
