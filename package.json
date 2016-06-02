@@ -18,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "fluent-ffmpeg": "^2.1.0",
+    "nw": "^0.15.0",
     "nw-builder": "^2.2.0",
     "nwjs-osx-menu": "0.0.4"
   }

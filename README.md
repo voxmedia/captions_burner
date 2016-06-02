@@ -15,6 +15,8 @@ npm start
 ```
 The app uses, NWJS, ffmpeg fluent-ffmpeg,  
 
+you might need to install `npm install nw -g`
+
 
 ## Deployment
 
