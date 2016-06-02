@@ -16,7 +16,7 @@ npm start
 The app uses, NWJS, ffmpeg fluent-ffmpeg,  
 
 
-### Deployment
+## Deployment
 
 Use deploy script
 
@@ -25,3 +25,7 @@ node deploy.js
 ```
 
 This creates a build folder inside the repo. The build folder is also in `.gitignore` to avoid accidentally pushing it to remote.
+
+## Packaged app ready for use
+
+See [release section](https://github.com/voxmedia/captions_burner/releases)
